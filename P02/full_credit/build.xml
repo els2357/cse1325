@@ -12,7 +12,7 @@
 	
 	<target name="clean" description="Clean output files">
 		<delete>
-			<fileset die=".">
+			<fileset dir=".">
 				<include name="**/*.class"/>
 			</fileset>
 		</delete>
