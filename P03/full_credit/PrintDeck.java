@@ -1,5 +1,10 @@
 class PrintDeck{
 	public static void main(String[] args){
-		//prints the shuffled deck to main with spaces seperated	
+		Deck deck = new Deck();
+		deck.shuffle();
+		while(deck.isEmpty() != true){
+			System.out.print(deck.deal() + " ");
+		}		
+		System.out.println();
 	}
 }

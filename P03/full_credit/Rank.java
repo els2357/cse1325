@@ -8,7 +8,7 @@ class Rank {
 	}
 	
 	@Override
-	public toString(){
-		return rank;
+	public String toString(){
+		return String.valueOf(rank);
 	}
 }

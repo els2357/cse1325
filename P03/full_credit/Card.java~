@@ -9,6 +9,6 @@ class Card{
 	
 	@Override
 	public String toString(){
-		return rank + suit;
+		return this.suit.toString() + this.rank.toString();
 	}
 }
