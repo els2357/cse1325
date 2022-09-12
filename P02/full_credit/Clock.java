@@ -10,13 +10,18 @@ public class Clock {
 	private int m;
 	private int s;
 
-	@Override
-	public String toString() {
-		return h + ":" + m + ":" + s;
+	private String twoDigit(int time){
+		if (time <= 9) {
+			return "0" + time;
+		}
+		
+		String t=Integer.toString(time);
+		return t;
 	}
 
-	private String twoDigit(int time){
-		return "0";
+	@Override
+	public String toString() {
+		return twoDigit(h) + ":" + twoDigit(m) + ":" + twoDigit(s);
 	}
 
 	public static void main(String[] args) {
