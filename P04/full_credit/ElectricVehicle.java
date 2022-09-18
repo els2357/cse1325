@@ -1,5 +1,5 @@
 public class ElectricVehicle extends Vehicle{
-	public static double centsPerKwhOfElectricity  = Double.NaN;
+	public static double centsPerKwhOfElectricity = Double.NaN;
 	private double whPerMile;
 	private double kwhInBattery;
 	

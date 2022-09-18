@@ -3,6 +3,14 @@ import java.util.ArrayList;
 
 class TravelCost{
 	public static void main(String [] args){
+
+        Scanner scanner = new Scanner(System.in);
+		System.out.println("What is the price per gallon of gas?");
+        final double dollarsPerGallonOfGas = scanner.nextDouble();
+        System.out.println("What is the price per kWh of electricity?");
+        final double centsPerKwhOfElectricity = scanner.nextDouble();
+        System.out.println("How many miles is your trip?");
+        double miles = scanner.nextDouble();
         
         ArrayList<Vehicle> vehicles = new ArrayList<>();
         
@@ -20,16 +28,7 @@ class TravelCost{
         vehicles.add(new GasVehicle(     2022, "Chrysler", "Pacifica",        BodyStyle.Minivan,    24,  19  ));
         vehicles.add(new GasVehicle(     2022, "Chrysler", "Pacifica Hybrid", BodyStyle.Minivan,    30,  16.5));
         
-        Scanner scanner = new Scanner(System.in);
-		System.out.println("What is the price per gallon of gas?");
-        double dollarsPerGallonOfGas = scanner.nextDouble();
-        System.out.println("What is the price per kWh of electricity");
-        double centsPerKwhOfElectricity = scanner.nextDouble();
-        System.out.println("How many miles is your trip?");
-        double miles = scanner.nextDouble();
-        
-        for (int i = 0; i < vehicles.size(); i++){
-        	
+        for (int i = 0; i < vehicles.size(); i++){        	
         	System.out.print("$ " + vehicles.get(i).dollarsToTravel(miles));
         	System.out.print(" (range " + Math.round(vehicles.get(i).range()) + ") ");
         	System.out.print(vehicles.get(i));
