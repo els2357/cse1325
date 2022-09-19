@@ -13,6 +13,8 @@ class TravelCost{
         double miles = scanner.nextDouble();
         
         ArrayList<Vehicle> vehicles = new ArrayList<>();
+        GasVehicle.dollarsPerGallonOfGas = dollarsPerGallonOfGas;
+        ElectricVehicle.centsPerKwhOfElectricity = centsPerKwhOfElectricity;
         
         vehicles.add(new ElectricVehicle(2022, "Telsa",    "Model S Plaid",   BodyStyle.Sedan,     297, 100  ));
         vehicles.add(new ElectricVehicle(2022, "Telsa",    "Model 3 LR",      BodyStyle.Sedan,     242,  82  ));
@@ -28,9 +30,16 @@ class TravelCost{
         vehicles.add(new GasVehicle(     2022, "Chrysler", "Pacifica",        BodyStyle.Minivan,    24,  19  ));
         vehicles.add(new GasVehicle(     2022, "Chrysler", "Pacifica Hybrid", BodyStyle.Minivan,    30,  16.5));
         
-        for (int i = 0; i < vehicles.size(); i++){        	
-        	System.out.print("$ " + vehicles.get(i).dollarsToTravel(miles));
-        	System.out.print(" (range " + Math.round(vehicles.get(i).range()) + ") ");
+        
+        for (int i = 0; i < vehicles.size(); i++){
+        	double twoDecimal = vehicles.get(i).dollarsToTravel(miles);
+        	System.out.print("$ ");
+        	System.out.printf("%.2f", twoDecimal);
+        	try {
+        		System.out.print(" (range " + Math.round(vehicles.get(i).range()) + ") ");
+        	} catch (ArithmeticException e){
+        		e.printStackTrace();
+        	} 
         	System.out.print(vehicles.get(i));
         	System.out.println();
         }

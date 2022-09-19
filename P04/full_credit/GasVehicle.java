@@ -14,8 +14,13 @@ public class GasVehicle extends Vehicle{
 	} 
 	
 	public double fuelConsumed(double miles){
-		//if more fuel is consumed than available (per gallonsInTank), throw an ArithmeticException with an appropriate message.
-		return miles / milesPerGallon;
+		if (miles < range()){
+			return miles / milesPerGallon;
+		}
+		
+		else {
+			throw new ArithmeticException("More Fuel Consumed Than Available!");
+		}
 	}
 	
 	public double dollarsToTravel(double miles){
