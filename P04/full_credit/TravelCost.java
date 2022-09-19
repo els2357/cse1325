@@ -31,16 +31,16 @@ class TravelCost{
         vehicles.add(new GasVehicle(     2022, "Chrysler", "Pacifica Hybrid", BodyStyle.Minivan,    30,  16.5));
         
         
-        for (int i = 0; i < vehicles.size(); i++){
-        	double twoDecimal = vehicles.get(i).dollarsToTravel(miles);
+        for (Vehicle vehicle : vehicles){
+        	double twoDecimal = vehicle.dollarsToTravel(miles);
         	System.out.print("$ ");
         	System.out.printf("%.2f", twoDecimal);
         	try {
-        		System.out.print(" (range " + Math.round(vehicles.get(i).range()) + ") ");
+        		System.out.print(" (range " + Math.round(vehicle.range()) + ") ");
         	} catch (ArithmeticException e){
         		e.printStackTrace();
         	} 
-        	System.out.print(vehicles.get(i));
+        	System.out.print(vehicle);
         	System.out.println();
         }
 	}

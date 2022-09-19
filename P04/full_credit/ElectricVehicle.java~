@@ -24,6 +24,6 @@ public class ElectricVehicle extends Vehicle{
 	}
 	
 	public double dollarsToTravel(double miles){
-		return fuelConsumed(miles) * (centsPerKwhOfElectricity/1000);
+		return fuelConsumed(miles) * (centsPerKwhOfElectricity/100);
 	}
 }
