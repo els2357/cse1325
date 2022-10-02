@@ -1,4 +1,4 @@
-abstract class Item{
+public class Item{
 	private String name;
 	private String description;
 	private int cost;
@@ -11,13 +11,21 @@ abstract class Item{
 		this.price = price;
 	}
 	
-	public abstract String name();
+	public String name(){
+		return name;
+	}
 	
-	public abstract String description();
+	public String description(){
+		return description;
+	}
 	
-	public abstract int price();
+	public int price(){
+		return price;
+	}
 	
-	public abstract int cost();
+	public int cost(){
+		return cost;
+	}
 	
 	@Override
 	public String toString(){
