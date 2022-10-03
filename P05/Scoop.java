@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Scoop{
 	private IceCreamFlavor flavor;
-	private ArrayList<MixIn> mixins = new ArrayList<MixIn>();;
+	private ArrayList<MixIn> mixins = new ArrayList<MixIn>();
 	
 	public Scoop(IceCreamFlavor flavor){
 		this.flavor = flavor;
@@ -18,12 +18,20 @@ public class Scoop{
 			return flavor + " ";
 		}
 		
-		else {	//works for one topping, but not more than one
+		else if (mixins.size() == 1) {
+			String scoop = flavor + " with ";
 			for (MixIn mixin : mixins){
-				return flavor + " with " + mixin;
+				 scoop = scoop + "" + mixin;
 			}
+			return "" + scoop;
 		}
-		
-		return flavor + "";
+			
+		else {
+			String scoop = flavor + " with ";
+			for (MixIn mixin : mixins){
+				scoop = scoop + mixin + ", ";
+			}
+			return "" + scoop;
+		}
 	}
 }

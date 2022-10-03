@@ -20,6 +20,7 @@ public class TestScoop{
 	MixIn mix3 = new MixIn(gummyWorms, MixInAmount.Drenched);
 	third.addMixIn(mix3);
 	third.addMixIn(mix1);
+	third.addMixIn(mix2);
 	
 	System.out.print(first.toString() + "\n");
 	System.out.print(second.toString() + "\n");
