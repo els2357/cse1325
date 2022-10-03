@@ -1,77 +1,30 @@
-import java.util.Scanner;
-
 public class TestScoop{
 	public static void main(String[] args){
-		System.out.print(
-		"=================\n\r" +
-		"MICE TESTER v0.01\n\r" +
-		"=================\n\n\r"
-		);
-		
-		Scanner scanner = new Scanner(System.in);
-		char input;
-        while (true){
-        	System.out.print("Create new (m)ixin, (i)ce cream flavor, (s)coop, or (q)uit? ");
-        	input = scanner.next().charAt(0);
-
-        	if (input=='i'){
-        		System.out.print("Creating new Ice Cream Flavor!\n\n");        	
-  	     		String buffer = scanner.nextLine();
-  	     		System.out.print("Name? ");
-        		String name = scanner.nextLine();
-        		System.out.print("Description? ");
-        		String description = scanner.nextLine();
-        		System.out.print("Price? ");
-        		int price = scanner.nextInt();
-        		System.out.print("Cost? ");
-        		int cost = scanner.nextInt();
-        		new IceCreamFlavor(name, description, price, cost);
-        		
-        		System.out.print(
-				"\n" + 
-				"=================\n\r" +
-				"MICE TESTER v0.01\n\r" +
-				"=================\n\n\r"
-				);       
-        	}
-        	
-        	else if (input=='m'){
-        		System.out.print("Creating new MixIn Flavor!\n\n");
-        		
-        		String buffer = scanner.nextLine();       	
-  	     		System.out.print("Name? ");
-        		String name = scanner.nextLine();
-        		System.out.print("Description? ");
-        		String description = scanner.nextLine();
-        		System.out.print("Price? ");
-        		int price = scanner.nextInt();
-        		System.out.print("Cost? ");
-        		int cost = scanner.nextInt();
-        		
-        		new MixInFlavor(name, description, price, cost);
-        		
-				System.out.print(
-				"\n" + 
-				"=================\n\r" +
-				"MICE TESTER v0.01\n\r" +
-				"=================\n\n\r"
-				);       
-        	}
-        	
-        	
-        	else if (input=='s'){
-        		System.out.print("Creating a Scoop of Ice cream!\n");
-        		//new Scoop(vanilla);
-        	}
-        	
-        	else if (input=='q'){
-        		System.out.print("Goodbye!\n");
-        		System.exit(1);
-        	}
-        	
-        	else {
-        		System.out.print("Incorrect Input. Try Again!\n");
-        	}
-		}
+	IceCreamFlavor vanilla = new IceCreamFlavor("Vanilla", "Vanilla bean with organic milk", 50, 5);
+	IceCreamFlavor chocolate = new IceCreamFlavor("Chocolate", "Chocolate custard with chocolate chunks", 100, 5);
+	IceCreamFlavor cookiesNcream = new IceCreamFlavor("Cookies and Cream", "Vanilla with Oreo's", 150, 10);
+	
+	MixInFlavor oreos = new MixInFlavor("Oreos", "Nabisco brand", 25, 1);
+	MixInFlavor sprinkles = new MixInFlavor("Sprinkles", "Not to be confused with my family", 10, 1);
+	MixInFlavor gummyWorms = new MixInFlavor("Gummy worms", "So realistic looking!", 15, 2);
+	
+	Scoop first = new Scoop(vanilla);
+	MixIn mix1 = new MixIn(oreos, MixInAmount.Extra);
+	first.addMixIn(mix1);
+	
+	Scoop second = new Scoop(chocolate);
+	MixIn mix2 = new MixIn(sprinkles, MixInAmount.Normal);
+	second.addMixIn(mix2);
+	
+	Scoop third = new Scoop(cookiesNcream);
+	MixIn mix3 = new MixIn(gummyWorms, MixInAmount.Drenched);
+	third.addMixIn(mix3);
+	third.addMixIn(mix1);
+	
+	System.out.print(first.toString() + "\n");
+	System.out.print(second.toString() + "\n");
+	System.out.print(third.toString()  + "\n");
+	
+	System.exit(1);
 	}
 }
