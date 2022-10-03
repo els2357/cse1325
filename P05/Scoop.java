@@ -14,24 +14,21 @@ public class Scoop{
 	
 	@Override
 	public String toString(){
+		String scoop = flavor + " ";
+
 		if (mixins.isEmpty()){
-			return flavor + " ";
+			return scoop;
 		}
 		
-		else if (mixins.size() == 1) {
-			String scoop = flavor + " with ";
-			for (MixIn mixin : mixins){
-				 scoop = scoop + "" + mixin;
+		scoop = scoop + "with ";
+		
+		for (int i = 0; i < mixins.size(); i++){
+			if (i > 0) {
+				scoop = scoop + ", ";
 			}
-			return "" + scoop;
+			scoop = scoop + mixins.get(i);
 		}
-			
-		else {
-			String scoop = flavor + " with ";
-			for (MixIn mixin : mixins){
-				scoop = scoop + mixin + ", ";
-			}
-			return "" + scoop;
-		}
+		
+		return scoop;
 	}
 }
