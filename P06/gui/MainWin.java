@@ -82,12 +82,26 @@ public class MainWin extends JFrame {
     	emporium.addIceCreamFlavor(flavor);
     	Object[] flavors = emporium.iceCreamFlavors();
     	System.out.println(Arrays.toString(flavors));
-    	//String[] output = Arrays.asList(flavors).toArray(new String[0]);
-		//display.setText(Arrays.toString(output));
-		//display.setVisible(true);
+    	String output = Arrays.toString(flavors);
+		display.setText(output);
+		display.setVisible(true);
     }
     
     public void onCreateMixInFlavorClick(){
+        display.setVisible(false);
+    	String name = JOptionPane.showInputDialog(this, "Name?");
+    	String description = JOptionPane.showInputDialog(this, "Description?");
+    	String cost = JOptionPane.showInputDialog(this, "Cost?");
+    	int costInt = Integer.parseInt(cost);
+    	String price = JOptionPane.showInputDialog(this, "Price?");
+    	int priceInt = Integer.parseInt(price);
+    	MixInFlavor flavor = new MixInFlavor(name, description, costInt, priceInt);
+    	emporium.addMixInFlavor(flavor);
+    	Object[] flavors = emporium.mixInFlavors();
+    	System.out.println(Arrays.toString(flavors));
+    	String output = Arrays.toString(flavors);
+		display.setText(output);
+		display.setVisible(true);
     }
     
     public void onCreateScoopClick(){
