@@ -11,7 +11,6 @@ public class Emporium{
 	private ArrayList<MixInFlavor> mixInFlavors = new ArrayList <>();
 	private ArrayList<IceCreamFlavor> iceCreamFlavors = new ArrayList <>();
 	private ArrayList<Scoop> scoops = new ArrayList <>();
-	//public Object[] al = new Object[];
 	
 	public void addMixInFlavor(MixInFlavor flavor){
 		mixInFlavors.add(flavor);

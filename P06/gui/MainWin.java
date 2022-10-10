@@ -1,16 +1,20 @@
 package gui;
 
 import emporium.Emporium;
+import product.IceCreamFlavor;
+import product.MixInFlavor;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.*;
-import javax.imageio.ImageIO;
+import java.util.Arrays;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import java.awt.BorderLayout;
 
-public class MainWin extends JFrame {// implements ActionListener {
+public class MainWin extends JFrame {
 	private Emporium emporium = new Emporium();
 	private JLabel display = new JLabel();
 	
@@ -58,6 +62,7 @@ public class MainWin extends JFrame {// implements ActionListener {
         menubar.add(help);
         setJMenuBar(menubar);
         
+        add(display);
         setVisible(true);
     }
     
@@ -66,6 +71,20 @@ public class MainWin extends JFrame {// implements ActionListener {
     }
     
     public void onCreateIceCreamFlavorClick(){
+    	display.setVisible(false);
+    	String name = JOptionPane.showInputDialog(this, "Name?");
+    	String description = JOptionPane.showInputDialog(this, "Description?");
+    	String cost = JOptionPane.showInputDialog(this, "Cost?");
+    	int costInt = Integer.parseInt(cost);
+    	String price = JOptionPane.showInputDialog(this, "Price?");
+    	int priceInt = Integer.parseInt(price);
+    	IceCreamFlavor flavor = new IceCreamFlavor(name, description, costInt, priceInt);
+    	emporium.addIceCreamFlavor(flavor);
+    	Object[] flavors = emporium.iceCreamFlavors();
+    	System.out.println(Arrays.toString(flavors));
+    	//String[] output = Arrays.asList(flavors).toArray(new String[0]);
+		//display.setText(Arrays.toString(output));
+		//display.setVisible(true);
     }
     
     public void onCreateMixInFlavorClick(){
