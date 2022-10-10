@@ -113,21 +113,26 @@ public class MainWin extends JFrame {
     	Object scoopclick = JOptionPane.showInputDialog(this, "Select an Ice Cream Flavor!", "Scoop", 3, null, iceflavors, null);
     	IceCreamFlavor object = (IceCreamFlavor) scoopclick;
     	Scoop scoop = new Scoop(object);
-    	
     	Object[] mixflavors = emporium.mixInFlavors();
-    	Object scoopclick1 = JOptionPane.showInputDialog(this, "Select a Mix in Flavor!", "Scoop", 3, null, mixflavors, null);
-    	MixInFlavor object1 = (MixInFlavor) scoopclick1;
     	
-    	Object scoopclick2 = JOptionPane.showInputDialog(this, "Select a Mix in Amount!", "Scoop", 3, null, MixInAmount.values(), null);
-    	MixInAmount object2 = (MixInAmount) scoopclick2;
-    	MixIn mixin = new MixIn(object1, object2);
+    	while (true){
+    	    Object scoopclick1 = JOptionPane.showInputDialog(this, "Select a Mix in Flavor!", "Scoop", 3, null, mixflavors, null); //Asks user to select from a list of MixIn Flavors
+	    	if (scoopclick1 == null){
+	    		break;
+	    	}
+	    	MixInFlavor object1 = (MixInFlavor) scoopclick1;	//Casts the Object Returned from JOptionPane into a MixInFlavor	
+    		Object scoopclick2 = JOptionPane.showInputDialog(this, "Select a Mix in Amount!", "Scoop", 3, null, MixInAmount.values(), null);//Asks user to select from a list of MixIn Amounts
+    		MixInAmount object2 = (MixInAmount) scoopclick2; //Casts the Object Returned from JOptionPane into a MixInAmount	
+    		MixIn mixin = new MixIn(object1, object2); //Adds the MixInFlavor and MixInAmount to a MixIn
+    		scoop.addMixIn(mixin); //Adds Mixin to Scoop
+    	}
+
+    		emporium.addScoop(scoop); //Adds created scoop to Emporium
+    		Object[] scoops = emporium.scoops();
+    		String output = Arrays.toString(scoops);
+    		display.setText("Scoops - " + output);
     	
-    	scoop.addMixIn(mixin);
-    	emporium.addScoop(scoop);
-    	Object[] scoops = emporium.scoops();
-    	String output = Arrays.toString(scoops);
     	
-		display.setText("Scoops - " + output);
 		display.setVisible(true);    	
     }
     
