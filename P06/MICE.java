@@ -1,5 +1,8 @@
+import gui.MainWin;
+
 public class MICE{
 	public static void main(String[] args){
-		//new gui.MainWin();
+		MainWin mice = new MainWin();
+		//mice.setVisible(true);
 	}
 }

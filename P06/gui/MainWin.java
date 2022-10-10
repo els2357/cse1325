@@ -11,13 +11,13 @@ import javax.swing.*;
 import javax.imageio.ImageIO;
 
 public class MainWin extends JFrame {// implements ActionListener {
-	private Emporium emporium;
-	private JLabel display;
+	private Emporium emporium = new Emporium();
+	private JLabel display = new JLabel();
 	
     public MainWin(){
-    	super("MICE");
+    	super("Mavs Ice Cream Emporium");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 200);
+        setSize(800, 400);
         
         JMenuBar menubar = new JMenuBar();
 
@@ -34,14 +34,14 @@ public class MainWin extends JFrame {// implements ActionListener {
         JMenu     help				= new JMenu("Help");
         JMenuItem about      		= new JMenuItem("About");
         
-        quit.addActionListener(event -> onQuitClick());
-        icecreamflavorc.addActionListener(event -> onCreateIceCreamFlavorClick());
-        mixinflavorc.addActionListener(event -> onCreateMixInFlavorClick());
-        scoopc.addActionListener(event -> onCreateScoopClick());
-        about.addActionListener(event -> onAboutClick());
-        icecreamflavorv.addActionListener(event -> view(Screen.ICE_CREAM_FLAVORS));
-        mixinflavorv.addActionListener(event -> view(Screen.MIX_IN_FLAVORS));       
-        scoopv.addActionListener(event -> view(Screen.SCOOPS));
+        quit.			 addActionListener(event -> onQuitClick());
+        icecreamflavorc. addActionListener(event -> onCreateIceCreamFlavorClick());
+        mixinflavorc.	 addActionListener(event -> onCreateMixInFlavorClick());
+        scoopc.			 addActionListener(event -> onCreateScoopClick());
+        about.			 addActionListener(event -> onAboutClick());
+        icecreamflavorv. addActionListener(event -> view(Screen.ICE_CREAM_FLAVORS));
+        mixinflavorv.	 addActionListener(event -> view(Screen.MIX_IN_FLAVORS));       
+        scoopv.			 addActionListener(event -> view(Screen.SCOOPS));
         
         file.add(quit);
         view.add(icecreamflavorv);
@@ -56,6 +56,9 @@ public class MainWin extends JFrame {// implements ActionListener {
         menubar.add(view);
         menubar.add(create);
         menubar.add(help);
+        setJMenuBar(menubar);
+        
+        setVisible(true);
     }
     
     public void onQuitClick(){
