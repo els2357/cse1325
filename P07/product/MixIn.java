@@ -1,5 +1,12 @@
 package product;
 
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class MixIn{
 	private MixInFlavor flavor;
 	private MixInAmount amount;
@@ -8,6 +15,12 @@ public class MixIn{
 		this.flavor = flavor;
 		this.amount = amount;
 	}
+	
+	/*public MixIn(BufferedReader in) throws IOException{
+	}
+	
+	public void save(BufferedWriter out) throws IOException{
+	}*/
 	
 	@Override
 	public String toString(){

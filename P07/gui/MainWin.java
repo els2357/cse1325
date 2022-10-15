@@ -11,39 +11,61 @@ import product.MixInFlavor;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+
 import javax.swing.JToolBar;
-import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.UIManager;
+
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JToggleButton;
+
 import javax.swing.Box;
-import javax.swing.ImageIcon;
-
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-
+import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+import javax.swing.BorderFactory;
+import java.awt.FlowLayout;
 
 import java.awt.Font;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
+import java.awt.Color;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class MainWin extends JFrame {
 	private Emporium emporium;
+	private File filename;
+	
 	private JLabel display;
 	private JMenuItem scoopc;
+	private String NAME = "MICE";
+	private String VERSION = "0.11";
+	private String FILE_VERSION = "1.0";
+	private String MAGIC_COOKIE = "Mavs";
 	
     public MainWin(){
     	super("Mavs Ice Cream Emporium");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 400);
+        setSize(1200, 800);
         
         JMenuBar menubar = new JMenuBar();
 
@@ -157,6 +179,28 @@ public class MainWin extends JFrame {
     }
     
     public void onOpenClick(){
+    	final JFileChooser fc = new JFileChooser(filename);
+        FileFilter mavFiles = new FileNameExtensionFilter("Mav files", "Mav");
+        fc.addChoosableFileFilter(mavFiles);         
+        fc.setFileFilter(mavFiles);                  
+        
+        int result = fc.showOpenDialog(this);        // Run dialog, return button clicked
+        if (result == JFileChooser.APPROVE_OPTION) { // Also CANCEL_OPTION and ERROR_OPTION
+            filename = fc.getSelectedFile();        // Obtain the selected File object
+            
+            try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+                String magicCookie = br.readLine();
+                if(!magicCookie.equals(MAGIC_COOKIE)) throw new RuntimeException("Not a Mav file");
+                String fileVersion = br.readLine();
+                if(!fileVersion.equals(FILE_VERSION)) throw new RuntimeException("Incompatible Mav file format");
+                
+                //emporium = new Emporium(br);                   // Open a new game
+                //setSticks();                       // Update with call to MainWin.view method;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Unable to open " + filename + '\n' + e, 
+                    "Failed", JOptionPane.ERROR_MESSAGE); 
+             }
+        }
     }
     
     public void onCreateIceCreamFlavorClick(){
@@ -224,7 +268,7 @@ public class MainWin extends JFrame {
     	String title = "";
     	StringBuilder s = new StringBuilder();
     	title = "MixIn Flavors";
-    	for (var t : emporium.iceCreamFlavors()) s.append(t.toString() + "<br/>");
+    	for (var t : emporium.mixInFlavors()) s.append(t.toString() + "<br/>");
     	display.setText("<html><font size=+4>" + title + 
                          "<br/></font><font size=+2>" + s.toString() + 
                          "</font></html>");
@@ -234,7 +278,7 @@ public class MainWin extends JFrame {
     	String title = "";
     	StringBuilder s = new StringBuilder();
     	title = "Scoops";
-    	for (var t : emporium.iceCreamFlavors()) s.append(t.toString() + "<br/>");
+    	for (var t : emporium.scoops()) s.append(t.toString() + "<br/>");
     	display.setText("<html><font size=+4>" + title + 
                          "<br/></font><font size=+2>" + s.toString() + 
                          "</font></html>");
@@ -262,6 +306,7 @@ public class MainWin extends JFrame {
           + "<p>Copyright 2022 by Ethan Sprinkle</p>"
           + "<p>Licensed under Gnu GPL 3.0</p>"
           + "<p>Portions of this applications source code attributed to Professor George F. Rice</p>"
+          + "<p>Icons by Ethan Sprinkle</p>"
           + "<p>Logo by ccarson, per the Open Clipart License</p>"
           + "<p><font size=-2>Rice, G (2022) MainWin source code (Version 0.2) [Source code]. https://github.com/prof-rice/cse1325-prof/blob/main/P06/gui/MainWin.java</font><p>"
           + "<p><font size=-2>https://openclipart.org/detail/178983/ice-cream- cone<p>"

@@ -7,10 +7,26 @@ import product.MixInAmount;
 import product.MixIn;
 import product.Scoop;
 
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Emporium{
 	private ArrayList<MixInFlavor> mixInFlavors = new ArrayList <>();
 	private ArrayList<IceCreamFlavor> iceCreamFlavors = new ArrayList <>();
 	private ArrayList<Scoop> scoops = new ArrayList <>();
+	
+	public void Emporium(){
+	}
+	
+	/*public Emporium(BufferedReader br) throws IOException{
+	}
+	
+	public void save(BufferedReader out) throws IOException{
+	}*/
 	
 	public void addMixInFlavor(MixInFlavor flavor){
 		mixInFlavors.add(flavor);
