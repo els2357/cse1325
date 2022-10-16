@@ -18,11 +18,15 @@ public class Scoop{
 		this.mixins = new ArrayList<>();
 	}
 	
-	/*public Scoop(BufferedReader in) throws IOException{
-	}
+	//public Scoop(BufferedReader in) throws IOException{}
 	
 	public void save(BufferedWriter out) throws IOException{
-	}*/
+		flavor.save(out);
+		int count = mixins.size();
+		for (int i = 0; i < count; i++){
+			out.write("" + toString() + '\n');
+		}
+	}
 	
 	
 	public void addMixIn(MixIn mixin){

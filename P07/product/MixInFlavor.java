@@ -12,9 +12,9 @@ public class MixInFlavor extends Item{
 		super(name, description, cost, price);
 	}
 	
-	/*public MixInFlavor(BufferedReader in) throws IOException{
-	}
+	//public MixInFlavor(BufferedReader in) throws IOException{}
 	
 	public void save(BufferedWriter out) throws IOException{
-	}*/
+		super.save(out);
+	}
 }

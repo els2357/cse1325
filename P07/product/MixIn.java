@@ -16,11 +16,12 @@ public class MixIn{
 		this.amount = amount;
 	}
 	
-	/*public MixIn(BufferedReader in) throws IOException{
-	}
+	//public MixIn(BufferedReader in) throws IOException{}
 	
 	public void save(BufferedWriter out) throws IOException{
-	}*/
+		flavor.save(out);
+		out.write("" + toString() + '\n');
+	}
 	
 	@Override
 	public String toString(){

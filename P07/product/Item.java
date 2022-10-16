@@ -20,10 +20,14 @@ public class Item{
 		this.price = price;
 	}
 	
-	/*public Item(BufferedReader in) throws IOException{}
+	//public Item(BufferedReader in) throws IOException{}
 	
 	public void save(BufferedWriter out) throws IOException{
-	}*/
+		out.write("" + name + '\n');
+		out.write("" + description + '\n');
+		out.write("" + cost + '\n');
+		out.write("" + price + '\n');
+	}
 	
 	public String name(){
 		return name;

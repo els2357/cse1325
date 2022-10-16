@@ -19,14 +19,15 @@ public class Emporium{
 	private ArrayList<IceCreamFlavor> iceCreamFlavors = new ArrayList <>();
 	private ArrayList<Scoop> scoops = new ArrayList <>();
 	
-	public void Emporium(){
+	public Emporium(){
 	}
 	
-	/*public Emporium(BufferedReader br) throws IOException{
+	public Emporium(BufferedReader br) throws IOException{
+		
 	}
 	
-	public void save(BufferedReader out) throws IOException{
-	}*/
+	public void save(BufferedWriter out) throws IOException{
+	}
 	
 	public void addMixInFlavor(MixInFlavor flavor){
 		mixInFlavors.add(flavor);
