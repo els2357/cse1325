@@ -16,7 +16,10 @@ public class MixIn{
 		this.amount = amount;
 	}
 	
-	//public MixIn(BufferedReader in) throws IOException{}
+	public MixIn(BufferedReader in) throws IOException{
+		flavor = new MixInFlavor(in);
+		amount = MixInAmount.valueOf(in.readLine());
+	}
 	
 	public void save(BufferedWriter out) throws IOException{
 		flavor.save(out);

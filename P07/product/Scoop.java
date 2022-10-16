@@ -18,7 +18,13 @@ public class Scoop{
 		this.mixins = new ArrayList<>();
 	}
 	
-	//public Scoop(BufferedReader in) throws IOException{}
+	public Scoop(BufferedReader in) throws IOException{
+		flavor = new IceCreamFlavor(in);
+		int count = mixins.size();
+		for (int i = 0; i < count; i++){
+			mixins.add(in);
+		}
+	}
 	
 	public void save(BufferedWriter out) throws IOException{
 		flavor.save(out);

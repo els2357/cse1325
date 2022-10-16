@@ -12,7 +12,9 @@ public class IceCreamFlavor extends Item{
 		super(name, description, cost, price);
 	}
 	
-	//public IceCreamFlavor(BufferedReader in) throws IOException{}
+	public IceCreamFlavor(BufferedReader in) throws IOException{
+		flavor = new IceCreamFlavor(in);
+	}
 	
 	public void save(BufferedWriter out) throws IOException{
 		super.save(out);

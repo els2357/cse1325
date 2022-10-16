@@ -20,7 +20,12 @@ public class Item{
 		this.price = price;
 	}
 	
-	//public Item(BufferedReader in) throws IOException{}
+	public Item(BufferedReader in) throws IOException{
+		name = in.readLine();
+		description = in.readLine();		
+		cost = Integer.parseInt(in.readLine());
+        price = Integer.parseInt(in.readLine());
+	}
 	
 	public void save(BufferedWriter out) throws IOException{
 		out.write("" + name + '\n');
