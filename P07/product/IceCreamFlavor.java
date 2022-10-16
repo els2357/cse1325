@@ -13,7 +13,7 @@ public class IceCreamFlavor extends Item{
 	}
 	
 	public IceCreamFlavor(BufferedReader in) throws IOException{
-		flavor = new IceCreamFlavor(in);
+		super(in);
 	}
 	
 	public void save(BufferedWriter out) throws IOException{

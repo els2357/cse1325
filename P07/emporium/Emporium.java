@@ -23,10 +23,41 @@ public class Emporium{
 	}
 	
 	public Emporium(BufferedReader br) throws IOException{
-		
+		ArrayList<MixInFlavor> mixInFlavors = new ArrayList <>();
+		ArrayList<IceCreamFlavor> iceCreamFlavors = new ArrayList <>();
+		ArrayList<Scoop> scoops = new ArrayList <>();
+		int count = mixInFlavors.size();		
+		for (int i = 0; i < count; i++){
+			MixInFlavor flavor = new MixInFlavor(br);		
+			mixInFlavors.add(i, flavor);
+		}
+		count = iceCreamFlavors.size();
+		for (int i = 0; i < count; i++){
+			IceCreamFlavor flavor = new IceCreamFlavor(br);		
+			iceCreamFlavors.add(i, flavor);
+		}
+		count = scoops.size();
+		for (int i = 0; i < count; i++){
+			Scoop scoop = new Scoop(br);		
+			scoops.add(i, scoop);
+		}
 	}
 	
 	public void save(BufferedWriter out) throws IOException{
+		int count = mixInFlavors.size();
+		for (int i = 0; i < count; i++){
+			out.write("" + toString() + '\n');
+		}
+		
+		count = iceCreamFlavors.size();
+		for (int i = 0; i < count; i++){
+			out.write("" + toString() + '\n');
+		}
+		
+		count = scoops.size();
+		for (int i = 0; i < count; i++){
+			out.write("" + toString() + '\n');
+		}
 	}
 	
 	public void addMixInFlavor(MixInFlavor flavor){

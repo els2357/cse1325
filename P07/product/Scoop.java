@@ -20,9 +20,12 @@ public class Scoop{
 	
 	public Scoop(BufferedReader in) throws IOException{
 		flavor = new IceCreamFlavor(in);
+		ArrayList<MixIn> mixins = new ArrayList<>();
 		int count = mixins.size();
+		
 		for (int i = 0; i < count; i++){
-			mixins.add(in);
+			MixIn mix = new MixIn(in);		
+			mixins.add(i, mix);
 		}
 	}
 	

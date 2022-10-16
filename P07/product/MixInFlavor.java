@@ -13,7 +13,7 @@ public class MixInFlavor extends Item{
 	}
 	
 	public MixInFlavor(BufferedReader in) throws IOException{
-		flavor = new MixInFlavor(in);
+		super(in);
 	}
 	
 	public void save(BufferedWriter out) throws IOException{
