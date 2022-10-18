@@ -18,12 +18,12 @@ public class MixIn{
 	
 	public MixIn(BufferedReader in) throws IOException{
 		flavor = new MixInFlavor(in);
-		amount = MixInAmount.valueOf(in.readLine());
+		this.amount = MixInAmount.valueOf( in.readLine() );
 	}
 	
 	public void save(BufferedWriter out) throws IOException{
 		flavor.save(out);
-		out.write("" + toString() + '\n');
+		out.write("" + amount + "\n");
 	}
 	
 	@Override

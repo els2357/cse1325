@@ -184,17 +184,17 @@ public class MainWin extends JFrame {
     }
     
     public void onSaveAsClick(){
-    	final JFileChooser fc = new JFileChooser(filename);  // Create a file chooser dialog
+    	final JFileChooser fc = new JFileChooser(filename);  
         FileFilter mavFiles = new FileNameExtensionFilter("Mav files", "Mav");
-        fc.addChoosableFileFilter(mavFiles);         // Add "Nim file" filter
-        fc.setFileFilter(mavFiles);                  // Show Nim files only by default
+        fc.addChoosableFileFilter(mavFiles);         
+        fc.setFileFilter(mavFiles);                  
         
-        int result = fc.showSaveDialog(this);        // Run dialog, return button clicked
-        if (result == JFileChooser.APPROVE_OPTION) { // Also CANCEL_OPTION and ERROR_OPTION
-            filename = fc.getSelectedFile();         // Obtain the selected File object
-            if(!filename.getAbsolutePath().endsWith(".mav"))  // Ensure it ends with ".nim"
+        int result = fc.showSaveDialog(this);        
+        if (result == JFileChooser.APPROVE_OPTION) { 
+            filename = fc.getSelectedFile();         
+            if(!filename.getAbsolutePath().endsWith(".mav"))  
                 filename = new File(filename.getAbsolutePath() + ".mav");
-            onSaveClick();                       // Delegate to Save method
+            onSaveClick();                       
         }
     }
     
@@ -204,9 +204,9 @@ public class MainWin extends JFrame {
         fc.addChoosableFileFilter(mavFiles);         
         fc.setFileFilter(mavFiles);                  
         
-        int result = fc.showOpenDialog(this);        // Run dialog, return button clicked
-        if (result == JFileChooser.APPROVE_OPTION) { // Also CANCEL_OPTION and ERROR_OPTION
-            filename = fc.getSelectedFile();        // Obtain the selected File object
+        int result = fc.showOpenDialog(this);        
+        if (result == JFileChooser.APPROVE_OPTION) { 
+            filename = fc.getSelectedFile();        
             
             try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
                 String magicCookie = br.readLine();
@@ -214,8 +214,8 @@ public class MainWin extends JFrame {
                 String fileVersion = br.readLine();
                 if(!fileVersion.equals(FILE_VERSION)) throw new RuntimeException("Incompatible Mav file format");
                 
-                emporium = new Emporium(br);                   // Open a new game
-                view(Screen.ICE_CREAM_FLAVORS);                // Update with call to MainWin.view method;
+                emporium = new Emporium(br);                   
+                view(Screen.ICE_CREAM_FLAVORS);                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,"Unable to open " + filename + '\n' + e, 
                     "Failed", JOptionPane.ERROR_MESSAGE); 

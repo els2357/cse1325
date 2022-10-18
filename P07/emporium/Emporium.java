@@ -23,41 +23,41 @@ public class Emporium{
 	}
 	
 	public Emporium(BufferedReader br) throws IOException{
-		ArrayList<MixInFlavor> mixInFlavors = new ArrayList <>();
-		ArrayList<IceCreamFlavor> iceCreamFlavors = new ArrayList <>();
-		ArrayList<Scoop> scoops = new ArrayList <>();
-		int count = mixInFlavors.size();		
+		int count = Integer.parseInt(br.readLine());		
 		for (int i = 0; i < count; i++){
-			MixInFlavor flavor = new MixInFlavor(br);		
-			mixInFlavors.add(i, flavor);
+			addIceCreamFlavor(new IceCreamFlavor(br));
 		}
-		count = iceCreamFlavors.size();
+		
+		count = Integer.parseInt(br.readLine());
 		for (int i = 0; i < count; i++){
-			IceCreamFlavor flavor = new IceCreamFlavor(br);		
-			iceCreamFlavors.add(i, flavor);
+			addMixInFlavor(new MixInFlavor(br));
 		}
-		count = scoops.size();
+		
+		count = Integer.parseInt(br.readLine());
 		for (int i = 0; i < count; i++){
-			Scoop scoop = new Scoop(br);		
-			scoops.add(i, scoop);
+			addScoop(new Scoop(br));
 		}
 	}
 	
 	public void save(BufferedWriter out) throws IOException{
-		int count = mixInFlavors.size();
+		int count = iceCreamFlavors.size();
+		out.write(count + "\n");
 		for (int i = 0; i < count; i++){
-			out.write("" + toString() + '\n');
+			iceCreamFlavors.get(i).save(out);
 		}
 		
-		count = iceCreamFlavors.size();
+		count = mixInFlavors.size();
+		out.write(count + "\n");
 		for (int i = 0; i < count; i++){
-			out.write("" + toString() + '\n');
+			mixInFlavors.get(i).save(out);
 		}
 		
 		count = scoops.size();
+		out.write(count + "\n");
 		for (int i = 0; i < count; i++){
-			out.write("" + toString() + '\n');
+			scoops.get(i).save(out);
 		}
+		
 	}
 	
 	public void addMixInFlavor(MixInFlavor flavor){

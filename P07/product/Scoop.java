@@ -11,18 +11,16 @@ import java.io.IOException;
 
 public class Scoop{
 	private IceCreamFlavor flavor;
-	private ArrayList<MixIn> mixins;
+	private ArrayList<MixIn> mixins = new ArrayList<>();
 	
 	public Scoop(IceCreamFlavor flavor){
 		this.flavor = flavor;
-		this.mixins = new ArrayList<>();
+		this.mixins.clear();
 	}
 	
 	public Scoop(BufferedReader in) throws IOException{
 		flavor = new IceCreamFlavor(in);
-		ArrayList<MixIn> mixins = new ArrayList<>();
-		int count = mixins.size();
-		
+		int count = Integer.parseInt(in.readLine());
 		for (int i = 0; i < count; i++){
 			MixIn mix = new MixIn(in);		
 			mixins.add(i, mix);
@@ -32,8 +30,9 @@ public class Scoop{
 	public void save(BufferedWriter out) throws IOException{
 		flavor.save(out);
 		int count = mixins.size();
+		out.write(count + "\n");
 		for (int i = 0; i < count; i++){
-			out.write("" + toString() + '\n');
+			mixins.get(i).save(out);
 		}
 	}
 	
