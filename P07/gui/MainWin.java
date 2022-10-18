@@ -304,22 +304,22 @@ public class MainWin extends JFrame {
                          "</font></html>");
     }
     
-    public void onAboutClick(){
+    public void onAboutClick(){    	
     	JDialog about = new JDialog();
         about.setLayout(new BoxLayout(about.getContentPane(), BoxLayout.PAGE_AXIS));
         about.setTitle("Mav's Ice Cream Emporium");
+        Canvas canvas = new Canvas();
+        about.add(canvas);
+        about.pack();
+        about.setVisible(true);
         
-        JLabel title = new JLabel("<html>"
-          + "<p><font size=+4>Mav's Ice Cream Emporium</font></p>"
-          + "</html>", JLabel.CENTER);
-        about.add(title);
-        
+        /*    
         try {
             BufferedImage myPicture = ImageIO.read(new File("gui/temp.png"));
             JLabel logo = new JLabel(new ImageIcon(myPicture));
             about.add(logo);
         } catch(IOException e) {
-        }       
+        }*/       
         
         JLabel info = new JLabel("<html>"
           + "<p>Version 0.11</p>"
@@ -332,15 +332,11 @@ public class MainWin extends JFrame {
           + "<p><font size=-2>https://openclipart.org/detail/178983/ice-cream- cone<p>"
           + "<br/></html>", JLabel.CENTER);
         about.add(info);
-
-		JPanel panel = new JPanel();
+        
+        about.add(Box.createVerticalStrut(10));
         JButton ok = new JButton("OK");
         ok.addActionListener(event -> about.setVisible(false));
-        panel.add(ok);
-        about.add(Box.createVerticalStrut(10));
-        
-        about.pack();
-        about.setVisible(true);
+        about.add(ok);
     }
     
     private void view(Screen screen){
