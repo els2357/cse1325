@@ -1,6 +1,7 @@
 # Compiled class file
 *.class
 *.java~
+*.cpp~
 
 # Log file
 *.log
