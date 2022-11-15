@@ -60,4 +60,24 @@ public class Serving{
 	public void addTopping(MixIn topping){
 		toppings.add(topping);
 	}
+
+	@Override
+	public String toString(){
+		String serving = container + " ";
+
+		if (scoops.isEmpty()){
+			return serving;
+		}
+		
+		serving = serving + "with ";
+		
+		for (int i = 0; i < scoops.size(); i++){
+			if (i > 0) {
+				serving = serving + ", ";
+			}
+			serving = serving + scoops.get(i);
+		}
+		
+		return serving;
+	}
 }

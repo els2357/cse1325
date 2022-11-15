@@ -35,4 +35,24 @@ public class Order{
 	public void addServing(Serving serving){
 		servings.add(serving);
 	}
+
+	@Override
+	public String toString(){
+		String order = " ";
+
+		if (servings.isEmpty()){
+			return order;
+		}
+		
+		order = order + "topped with ";
+		
+		for (int i = 0; i < servings.size(); i++){
+			if (i > 0) {
+				order = order + ", ";
+			}
+			order = order + servings.get(i);
+		}
+		
+		return order;
+	}
 }

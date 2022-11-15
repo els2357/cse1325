@@ -149,7 +149,7 @@ public class MainWin extends JFrame {
         createMixIn.addActionListener(event -> onCreateMixInFlavorClick());
         createMixIn.setEnabled(true);
         
-        JButton createContainer = new JButton(new ImageIcon("gui/createScoop.png"));
+        JButton createContainer = new JButton(new ImageIcon("gui/createContainer.png"));
         toolbar.add(createContainer);
         createContainer.addActionListener(event -> onCreateContainerClick());
         createContainer.setEnabled(true);
@@ -169,7 +169,7 @@ public class MainWin extends JFrame {
         viewMixIn.addActionListener(event -> onViewMixInFlavorClick());
         viewMixIn.setEnabled(true);
         
-        JButton viewContainer = new JButton(new ImageIcon("gui/viewScoop.png"));
+        JButton viewContainer = new JButton(new ImageIcon("gui/viewContainer.png"));
         toolbar.add(viewContainer);
         viewContainer.addActionListener(event -> onViewContainerClick());
         viewContainer.setEnabled(true);
@@ -317,11 +317,11 @@ public class MainWin extends JFrame {
     		//while scoops < # of max scoops
     		Serving serving = new Serving(object);
     	    if(emporium.containers().length > 0) {                
-                while(true) {
+                //while(true) {
                     Scoop scoop = onCreateScoop();
                     serving.addScoop(scoop);
-                    if (scoop.equals(null)) break;                                                           
-                }
+                    //if (scoop.equals(null)) break;                                                           
+                //}
                 
                 String prompt = "<html>" + serving + "<br/>Add a topping?</html>";                
                 while(true) {
