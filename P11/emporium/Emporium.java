@@ -1,6 +1,10 @@
 package emporium;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 import product.IceCreamFlavor;
 import product.MixInFlavor;
 import product.MixInAmount;
@@ -25,6 +29,7 @@ public class Emporium{
 	private ArrayList<Container> containers = new ArrayList <>();
 	private ArrayList<Order> orders = new ArrayList <>();
 	private ArrayList<Customer> customers = new ArrayList <>();
+	private MultiMap<Customer, Serving> favoriteServings = new MultiMap<>();
 	
 	public Emporium(){
 	}
@@ -107,6 +112,10 @@ public class Emporium{
 	
 	public void addOrder(Order order){
 		orders.add(order);
+		Customer customer = order.getCustomer();
+		for(Object o : order.servings()){
+			favoriteServings.put(customer, (Serving) o);
+		}
 	}
 	
 	public Object[] customers(){
@@ -131,6 +140,11 @@ public class Emporium{
 	
 	public Object[] orders(){
 		Object[] ordersObject = orders.toArray();		
+		return ordersObject;
+	}
+	
+	public Object[] favoriteServings(Customer customer){
+		Object[] ordersObject = favoriteServings.get(customer);		
 		return ordersObject;
 	}
 }

@@ -43,6 +43,11 @@ public class Order{
 		return customer;
 	}
 	
+	public Object[] servings(){
+		Object[] servingsObject = servings.toArray();		
+		return servingsObject;
+	}
+	
 	public double price(){
 		double orderPrice = 0;
 		if (servings.size() > 0){

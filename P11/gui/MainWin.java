@@ -325,7 +325,7 @@ public class MainWin extends JFrame {
             Customer customer = (Customer) JOptionPane.showInputDialog(this, "Customer?", "New Customer", JOptionPane.QUESTION_MESSAGE, null, emporium.customers(), null);            
             if(customer != null){       
             	Serving serving = null;
-            	while((serving = onCreateServing()) != null) {
+            	while((serving = onCreateServing(customer)) != null) {
             	    if(order == null) order = new Order(customer);
             	    order.addServing(serving);
             	    int result = JOptionPane.showConfirmDialog(
@@ -341,8 +341,15 @@ public class MainWin extends JFrame {
         }
     }
     
-    protected Serving onCreateServing() {
+    protected Serving onCreateServing(Customer customer) {
         Serving serving = null;
+		Object[] favServings = emporium.favoriteServings(customer);
+		if (favServings != null){
+			serving = (Serving) JOptionPane.showInputDialog(this, "Select Favorite Serving", "Select Favorite Serving?", JOptionPane.QUESTION_MESSAGE, null, favServings, null);
+			if (serving != null){
+				return serving;
+			}
+		}
         try {
             Container container = (Container) JOptionPane.showInputDialog(this, "Container?", "New Container", JOptionPane.QUESTION_MESSAGE, null, emporium.containers(), null);
             if(container != null) {
