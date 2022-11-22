@@ -9,6 +9,8 @@ import product.Container;
 import product.Order;
 import product.Serving;
 import product.Scoop;
+import person.Person;
+import person.Customer;
 
 import java.io.File;
 import java.io.BufferedReader;
@@ -22,6 +24,7 @@ public class Emporium{
 	private ArrayList<IceCreamFlavor> iceCreamFlavors = new ArrayList <>();
 	private ArrayList<Container> containers = new ArrayList <>();
 	private ArrayList<Order> orders = new ArrayList <>();
+	private ArrayList<Customer> customers = new ArrayList <>();
 	
 	public Emporium(){
 	}
@@ -46,6 +49,11 @@ public class Emporium{
 		count = Integer.parseInt(br.readLine());
 		for (int i = 0; i < count; i++){
 			addOrder(new Order(br));
+		}
+		
+		count = Integer.parseInt(br.readLine());
+		for (int i = 0; i < count; i++){
+			addCustomer(new Customer(br));
 		}
 	}
 	
@@ -73,6 +81,16 @@ public class Emporium{
 		for (int i = 0; i < count; i++){
 			orders.get(i).save(out);
 		}
+		
+		count = customers.size();
+		out.write(count + "\n");
+		for (int i = 0; i < count; i++){
+			customers.get(i).save(out);
+		}
+	}
+	
+	public void addCustomer(Customer customer){
+		customers.add(customer);
 	}
 	
 	public void addMixInFlavor(MixInFlavor flavor){
@@ -89,6 +107,11 @@ public class Emporium{
 	
 	public void addOrder(Order order){
 		orders.add(order);
+	}
+	
+	public Object[] customers(){
+		Object[] customersObject = customers.toArray();
+		return customersObject;
 	}
 	
 	public Object[] mixInFlavors(){

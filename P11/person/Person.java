@@ -31,13 +31,19 @@ public class Person{
 		return name;
 	}
 	
-	//@Override
-	public boolean equals(Person rhs){
-		return true;
+	@Override
+	public boolean equals(Object rhs){
+		if(this == rhs) return true;
+		if(rhs == null)  return false;
+		if(this.getClass() != rhs.getClass()) return false;
+		Person person = (Person) rhs;
+		return phone.equals(person.phone);
 	}
 	
 	@Override
 	public int hashCode(){
-		return 0;
+		int hash = 7;
+		hash = 31*hash + (phone == null ? 0 : phone.hashCode());
+		return hash;
 	}
 }

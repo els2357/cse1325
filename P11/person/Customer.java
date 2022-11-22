@@ -19,4 +19,9 @@ public class Customer extends Person{
 	public void save(BufferedWriter out) throws IOException{
 		super.save(out);
 	}
+	
+	@Override
+	public String toString(){
+		return name;
+	} 
 }

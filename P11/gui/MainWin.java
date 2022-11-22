@@ -17,6 +17,8 @@ import product.Container;
 import product.Scoop;
 import product.Serving;
 import product.Order;
+import person.Customer;
+import person.Person;
 
 import emporium.Emporium;
 
@@ -49,22 +51,23 @@ public class MainWin extends JFrame {
         JMenuBar menubar = new JMenuBar();
 
         JMenu     file       		= new JMenu("File");
-        JMenuItem quit       		= new JMenuItem("Quit");        
+        JMenuItem open              = new JMenuItem("Open");     
         JMenuItem save              = new JMenuItem("Save");
         JMenuItem saveAs            = new JMenuItem("Save As");
-        JMenuItem open              = new JMenuItem("Open");
+        JMenuItem quit       		= new JMenuItem("Quit");   
         JMenu     view       		= new JMenu("View");
         JMenuItem icecreamflavorv	= new JMenuItem("Ice Cream Flavor");
         JMenuItem mixinflavorv      = new JMenuItem("Mix In Flavor");
         JMenuItem containerv      	= new JMenuItem("Container");
         JMenuItem orderv			= new JMenuItem("Order");
-
+        JMenuItem customerv			= new JMenuItem("Customer");        
         
         JMenu	  create			= new JMenu("Create");
         JMenuItem icecreamflavorc	= new JMenuItem("Ice Cream Flavor");
         JMenuItem mixinflavorc      = new JMenuItem("Mix In Flavor");
         JMenuItem containerc      	= new JMenuItem("Container");
         JMenuItem orderc			= new JMenuItem("Order");
+        JMenuItem customerc			= new JMenuItem("Customer");
         
         JMenu     help				= new JMenu("Help");
         JMenuItem about      		= new JMenuItem("About");
@@ -76,17 +79,20 @@ public class MainWin extends JFrame {
         icecreamflavorc. addActionListener(event -> onCreateIceCreamFlavorClick());
         mixinflavorc.	 addActionListener(event -> onCreateMixInFlavorClick());
         containerc.		 addActionListener(event -> onCreateContainerClick());
-        orderc.		     addActionListener(event -> onCreateOrderClick());               
+        orderc.		     addActionListener(event -> onCreateOrderClick());
+        customerc.		 addActionListener(event -> onCreateCustomerClick());
+                       
         about.			 addActionListener(event -> onAboutClick());
         icecreamflavorv. addActionListener(event -> view(Screen.ICE_CREAM_FLAVORS));
         mixinflavorv.	 addActionListener(event -> view(Screen.MIX_IN_FLAVORS));       
         containerv.		 addActionListener(event -> view(Screen.CONTAINERS));
         orderv.		 	 addActionListener(event -> view(Screen.ORDERS));
+        customerv.		 addActionListener(event -> view(Screen.CUSTOMERS));
         
-        file.add(quit);
      	file.add(open);
         file.add(save);
         file.add(saveAs);
+        file.add(quit);
         
         view.add(icecreamflavorv);
         view.add(mixinflavorv);
@@ -122,6 +128,11 @@ public class MainWin extends JFrame {
         toolbar.add(openButton);
         openButton.addActionListener(event -> onOpenClick());
         openButton.setEnabled(true);
+
+        JButton createCustomer = new JButton(new ImageIcon("gui/createCustomer.png"));
+        toolbar.add(createCustomer);
+        createCustomer.addActionListener(event -> onCreateCustomerClick());
+        createCustomer.setEnabled(true);
         
         JButton createIceCream = new JButton(new ImageIcon("gui/createIceCream.png"));
         toolbar.add(createIceCream);
@@ -142,6 +153,11 @@ public class MainWin extends JFrame {
         toolbar.add(createOrder);
         createOrder.addActionListener(event -> onCreateOrderClick());
         createOrder.setEnabled(true);
+        
+        JButton viewCustomer = new JButton(new ImageIcon("gui/viewCustomer.png"));
+        toolbar.add(viewCustomer);
+        viewCustomer.addActionListener(event -> onViewCustomerClick());
+        viewCustomer.setEnabled(true);
         
         JButton viewIceCream = new JButton(new ImageIcon("gui/viewIceCream.png"));
         toolbar.add(viewIceCream);
@@ -181,6 +197,29 @@ public class MainWin extends JFrame {
     	System.exit(0);
     }
     
+    protected void onCreateCustomerClick(){
+    	try {
+            JLabel name = new JLabel("<html>Name</html>");
+            JTextField names = new JTextField(20);
+            JLabel phone = new JLabel("<html><br/>Phone</html>");
+            JTextField phones = new JTextField(20);
+            
+            Object[] objects = { // Array of widgets to display
+                name,   names,
+                phone,   phones};
+            int button = JOptionPane.showConfirmDialog(
+                this, objects, "New Customer", JOptionPane.OK_CANCEL_OPTION,
+                  JOptionPane.QUESTION_MESSAGE, new ImageIcon("createCustomer.png"));
+            if(button == JOptionPane.OK_OPTION) {
+                emporium.addCustomer(new Customer(
+                    names.getText(), phones.getText()));
+                view(Screen.CUSTOMERS);         
+           }
+        } catch(Exception e) {
+            System.err.println("onCreateCustomerClick exception: " + e);
+        }
+    }   
+    
     protected void onCreateContainerClick() {
         try {
             JLabel name = new JLabel("<html>Name</html>");
@@ -197,7 +236,7 @@ public class MainWin extends JFrame {
                 scoop,  scoops};
             int button = JOptionPane.showConfirmDialog(
                 this, objects, "New Container", JOptionPane.OK_CANCEL_OPTION,
-                  JOptionPane.QUESTION_MESSAGE, new ImageIcon("gui/container_icon.png"));
+                  JOptionPane.QUESTION_MESSAGE, new ImageIcon("gui/createContainer.png"));
             if(button == JOptionPane.OK_OPTION) {
                 emporium.addContainer(new Container(
                     names.getText(), descs.getText(), (Integer) scoops.getValue()));
@@ -228,7 +267,7 @@ public class MainWin extends JFrame {
                 cost,   costs};
             int button = JOptionPane.showConfirmDialog( 
                 this, objects, "New Ice Cream Flavor", JOptionPane.OK_CANCEL_OPTION,
-                  JOptionPane.QUESTION_MESSAGE, new ImageIcon("gui/createIceCreamFlavorButton.png"));
+                  JOptionPane.QUESTION_MESSAGE, new ImageIcon("gui/createIceCreamFlavor.png"));
             if(button == JOptionPane.OK_OPTION) {
                 emporium.addIceCreamFlavor(new IceCreamFlavor(
                     names.getText(), descs.getText(), 
@@ -265,7 +304,7 @@ public class MainWin extends JFrame {
                 cost,   costs};
             int button = JOptionPane.showConfirmDialog( // Show the dialog
                 this, objects, "Create Mix In Flavor", JOptionPane.OK_CANCEL_OPTION,
-                  JOptionPane.QUESTION_MESSAGE, new ImageIcon("gui/createMixInFlavorButton.png"));
+                  JOptionPane.QUESTION_MESSAGE, new ImageIcon("gui/createMixInFlavor.png"));
             if(button == JOptionPane.OK_OPTION) {
                 emporium.addMixInFlavor(new MixInFlavor(
                     names.getText(), descs.getText(), 
@@ -375,7 +414,7 @@ public class MainWin extends JFrame {
                 amount, amounts};
             int button = JOptionPane.showConfirmDialog( // Show the dialog
                 this, objects, "New MixIn", JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE, new ImageIcon("gui/MixInIcon.png"));
+                    JOptionPane.QUESTION_MESSAGE, new ImageIcon("gui/createMixIn.png"));
             if(button == JOptionPane.YES_OPTION) 
                 mixin = new MixIn((MixInFlavor) flavors.getSelectedItem(), 
                                   (MixInAmount) amounts.getSelectedItem());         
@@ -434,6 +473,16 @@ public class MainWin extends JFrame {
                     "Failed", JOptionPane.ERROR_MESSAGE); 
              }
         }
+    }
+
+    public void onViewCustomerClick(){
+    	String title = "";
+    	StringBuilder s = new StringBuilder();
+    	title = "Customers";
+    	for (var t : emporium.customers()) s.append(t.toString() + "<br/>");
+    	display.setText("<html><font size=+4>" + title + 
+                         "<br/></font><font size=+2>" + s.toString() + 
+                         "</font></html>");
     }
        
     public void onViewIceCreamFlavorClick(){
@@ -506,6 +555,11 @@ public class MainWin extends JFrame {
     private void view(Screen screen){
     	String title = "";
     	StringBuilder s = new StringBuilder();
+    	if (screen.equals(Screen.CUSTOMERS)){
+    		title = "Customers";
+    		for (var t : emporium.customers()) s.append(t.toString() + "<br/>");
+    	}
+    	
     	if (screen.equals(Screen.ICE_CREAM_FLAVORS)){
     		title = "Ice Cream Flavors";
     		for (var t : emporium.iceCreamFlavors()) s.append(t.toString() + "<br/>");

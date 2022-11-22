@@ -1,5 +1,7 @@
 package product;
 
+import person.Customer;
+
 import java.util.ArrayList;
 
 import java.io.File;
@@ -11,13 +13,16 @@ import java.io.IOException;
 
 public class Order{
 	private ArrayList<Serving> servings;
+	private Customer customer;
 	
 	public Order(){
 		this.servings = new ArrayList<>();
+		this.customer = customer;
 	}
 	
 	public Order(BufferedReader in) throws IOException{	
 		this.servings = new ArrayList<>();
+		this.customer = customer;
 		int count = Integer.parseInt(in.readLine());		
 		for (int i = 0; i < count; i++){
 			Serving serving = new Serving(in);		
@@ -33,7 +38,11 @@ public class Order{
 	public void addServing(Serving serving){
 		servings.add(serving);
 	}
-
+	
+	public Customer getCustomer(){
+		return customer;
+	}
+	
 	public double price(){
 		double orderPrice = 0;
 		if (servings.size() > 0){
@@ -48,10 +57,10 @@ public class Order{
 	public String toString(){
         StringBuilder result = new StringBuilder();
         String separator = "";
-        int count = 0;
+        int count = 1;
         if(servings.size() > 0) {
             for(Serving s : servings) {
-                result.append("Order" + " " + (count++) + " - $" + s.price() + "<br/>" + separator + s.toString());
+                result.append("Order" + " " + (count++) + " - $" + s.price() + " For " + this.getCustomer() + ':' + "<br/>" + separator + s.toString());
                 separator = "<br/>";
             }
         }
