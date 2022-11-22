@@ -322,17 +322,20 @@ public class MainWin extends JFrame {
     protected void onCreateOrderClick() {
         Order order = null;
         try {
-            Serving serving = null;
-            while((serving = onCreateServing()) != null) {
-                if(order == null) order = new Order();
-                order.addServing(serving);
-                int result = JOptionPane.showConfirmDialog(
-                    this, order, "Add Another Serving?", JOptionPane.YES_NO_CANCEL_OPTION);
-                if(result == JOptionPane.CANCEL_OPTION) return;
-                if(result == JOptionPane.NO_OPTION) break;
+            Customer customer = (Customer) JOptionPane.showInputDialog(this, "Customer?", "New Customer", JOptionPane.QUESTION_MESSAGE, null, emporium.customers(), null);            
+            if(customer != null){       
+            	Serving serving = null;
+            	while((serving = onCreateServing()) != null) {
+            	    if(order == null) order = new Order(customer);
+            	    order.addServing(serving);
+            	    int result = JOptionPane.showConfirmDialog(
+                    	this, order, "Add Another Serving?", JOptionPane.YES_NO_CANCEL_OPTION);
+                	if(result == JOptionPane.CANCEL_OPTION) return;
+                	if(result == JOptionPane.NO_OPTION) break;
+            	}
+            	if(order != null) emporium.addOrder(order);
+            	view(Screen.ORDERS);
             }
-            if(order != null) emporium.addOrder(order);
-            view(Screen.ORDERS);
         } catch(Exception e) {
             System.err.println("onCreateScoop exception: " + e);
         }

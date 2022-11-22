@@ -15,7 +15,7 @@ public class Order{
 	private ArrayList<Serving> servings;
 	private Customer customer;
 	
-	public Order(){
+	public Order(Customer customer){
 		this.servings = new ArrayList<>();
 		this.customer = customer;
 	}
