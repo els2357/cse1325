@@ -30,6 +30,19 @@ public class Scoop {
         mixins.add(mixin);
     }
     
+    public double price(){
+		double scoopPrice = 0;
+		double flavorPrice = this.flavor.price;
+		double mixinsPrice = 0;
+		if (mixins.size() > 0){
+			for (int i=0; i < mixins.size(); i++){
+				mixinsPrice += mixins.get(i).price();
+			}
+		}
+		scoopPrice = flavorPrice + mixinsPrice;
+		return scoopPrice;
+	}
+    
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder(flavor.toString());

@@ -26,6 +26,25 @@ public class MixIn{
 		out.write("" + amount + "\n");
 	}
 	
+	public double price(){
+		double pricemixin = this.flavor.price;
+		switch (this.amount) {
+			case Light:
+				pricemixin = 0.8 * pricemixin;
+				break;
+			case Normal:
+				pricemixin = pricemixin;
+				break;
+			case Extra:
+				pricemixin = 1.2 * pricemixin;
+				break;
+			case Drenched:
+				pricemixin = 2.0 * pricemixin;
+				break;
+		}
+		return pricemixin;
+	}
+	
 	@Override
 	public String toString(){
 		if (amount.equals(MixInAmount.Normal)){

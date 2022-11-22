@@ -34,13 +34,24 @@ public class Order{
 		servings.add(serving);
 	}
 
+	public double price(){
+		double orderPrice = 0;
+		if (servings.size() > 0){
+			for (int i=0; i<= servings.size(); i++){
+				orderPrice += servings.get(i).price();
+			}
+		}
+		return orderPrice;
+	}
+
 	@Override
 	public String toString(){
         StringBuilder result = new StringBuilder();
         String separator = "";
+        int count = 0;
         if(servings.size() > 0) {
             for(Serving s : servings) {
-                result.append(separator + s.toString());
+                result.append("Order" + " " + (count++) + " - $" + s.price() + "<br/>" + separator + s.toString());
                 separator = "<br/>";
             }
         }

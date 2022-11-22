@@ -29,9 +29,18 @@ public class Container{
 		out.write("" + description + '\n');
 		out.write("" + maxScoops + '\n');
 	}
-	public String name() {return name;}
-	public String description() {return description;}
-    public int maxScoops() {return maxScoops;}
+	
+	public String name() {
+		return name;
+	}
+	
+	public String description() {
+		return description;
+	}
+    
+    public int maxScoops() {
+    	return maxScoops;
+    }
 	
 	@Override
 	public String toString(){

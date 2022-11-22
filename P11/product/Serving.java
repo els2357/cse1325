@@ -46,7 +46,29 @@ public class Serving{
 	public void addTopping(MixIn topping){
 		toppings.add(topping);
 	}
-
+	
+	public int numScoops(){
+		return scoops.size();
+	}
+	
+	public double price(){
+		double scoopsPrice = 0;
+		double toppingsPrice = 0;
+		if (scoops.size() > 0){
+			for (int i=0; i< scoops.size(); i++){
+				scoopsPrice += scoops.get(i).price();
+			}
+		}
+		
+		if 	(toppings.size() > 0){
+			for (int i=0; i< toppings.size(); i++){
+				toppingsPrice += toppings.get(i).price();
+			}
+		}
+		double servingPrice = scoopsPrice + toppingsPrice;
+		return servingPrice;
+	}
+	
 	@Override
 	public String toString(){
         StringBuilder result = new StringBuilder(container.toString());

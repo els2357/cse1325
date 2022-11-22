@@ -279,6 +279,7 @@ public class MainWin extends JFrame {
             System.err.println("onCreateMixInFlavorClick exception: " + e);
         }
     }
+    
     protected void onCreateOrderClick() {
         Order order = null;
         try {
@@ -297,6 +298,7 @@ public class MainWin extends JFrame {
             System.err.println("onCreateScoop exception: " + e);
         }
     }
+    
     protected Serving onCreateServing() {
         Serving serving = null;
         try {
@@ -305,14 +307,18 @@ public class MainWin extends JFrame {
                 serving = new Serving(container);
                 Scoop scoop = null;
                 boolean noScoop = true;
-                while((scoop = onCreateScoop()) != null) {
+                int maxScoop = container.maxScoops();
+                int numScoops = 0;
+                while(((scoop = onCreateScoop()) != null) && numScoops<maxScoop) {
                     serving.addScoop(scoop);
                     noScoop = false;
+                    numScoops++;
                     int result = JOptionPane.showConfirmDialog(
                         this, serving, "Add another scoop?", JOptionPane.YES_NO_CANCEL_OPTION);
                     if(result == JOptionPane.CANCEL_OPTION) return null;
                     if(result == JOptionPane.NO_OPTION) break;
                 }
+                
                 if(noScoop) return null; 
                 if(emporium.mixInFlavors().length > 0) {
                     String prompt = "<html>" + serving + "<br/>Add a topping?</html>";
