@@ -6,8 +6,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 public class Polynomial {
+    public static Object lock = new Object ();
     public static boolean log = false;   // Set true to print log messages
-    public static void LOG(String s) {
+    public synchronized static void LOG(String s) {
         if(log) System.err.println("==> " + s);
     }
 
@@ -33,12 +34,17 @@ public class Polynomial {
     }
     public void solve(double min, double max, int nthreads, double slices, double precision) {
         roots.clear();
-        double slices2 = slices/nthreads;
+        Thread[] threads = new Thread[nthreads];
         for (int i=0; i < nthreads; i++){
+        	final int threadID = i;
         	double min2 = min + i*(max-min)/nthreads;
         	double max2 = min + (i+1)*(max-min)/nthreads;
-        	(new Thread(() -> solveRecursive(min2, max2, nthreads, slices2, precision, 0))).start();
-        } 
+        	//threads[i] = (new Thread(() -> solveRecursive(min, max, 1, slices, precision, 0))).start();
+        }
+        for (int i=0; i < nthreads; i++){
+        	threads[i].join();
+        }
+        solveRecursive(min, max, 1, slices, precision, 0);
     }
     public Object[] roots() {
         return roots.toArray();
@@ -79,7 +85,9 @@ public class Polynomial {
                 if((Math.abs(eval(x1+x2)/2) > precision) && (Math.abs(x2 - x1) > precision) && (recursion < MAX_RECURSIONS)) {
                     solveRecursive(x1, x2, threadID, Math.min(slices, (x2-x1)/precision), precision, recursion+1); // recurse for more precision
                 } else {
-                    roots.add((x1+x2)/2);
+                	synchronized(lock) {
+	                    roots.add((x1+x2)/2);
+	                }
                 }
             }
             x1 = x2; 
