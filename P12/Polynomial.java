@@ -35,26 +35,40 @@ public class Polynomial {
     public void solve(double min, double max, int nthreads, double slices, double precision) {
         roots.clear();
         Thread[] threads = new Thread[nthreads];
+        final double precision2 = precision;
+        final double slices2 = slices/nthreads;
         for (int i=0; i < nthreads; i++){
         	final int threadID = i;
-        	double min2 = min + i*(max-min)/nthreads;
-        	double max2 = min + (i+1)*(max-min)/nthreads;
-        	//threads[i] = (new Thread(() -> solveRecursive(min, max, 1, slices, precision, 0))).start();
+        	final double min2 = min + i*(max-min)/nthreads;
+        	final double max2 = min + (i+1)*(max-min)/nthreads;
+        	Runnable runnable = new Runnable() {
+                public void run() {
+                        solveRecursive(min2, max2, threadID, slices2, precision2, 0);
+                }
+                };
+            threads[i] = new Thread(runnable);
+            threads[i].start();
         }
-        for (int i=0; i < nthreads; i++){
-        	threads[i].join();
+        for(Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted Exception");
+            }
         }
-        solveRecursive(min, max, 1, slices, precision, 0);
     }
+
     public Object[] roots() {
         return roots.toArray();
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for(Term term : terms) sb.append(term.toString());
         return sb.toString();
     }
+
     @Override
     public boolean equals(Object o) {
         if(o == this) return true;
