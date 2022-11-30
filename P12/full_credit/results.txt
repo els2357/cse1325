@@ -210,8 +210,7 @@ Once the thread count reached 4+ threads, the time dipped to around 10-11 second
 
 
 QUESTION 4: Does adding more threads increase the "system load", or is it constant regardless of the number of threads?  Why?
-System load is constant regardless of the number of threads, as seen when running the program with up to 1000 or 5000 threads. Threads do not increase the CPU speed
-
+System load is constant regardless of the number of threads, as seen when running the program with up to 1000 or 5000 threads. Threads do not increase CPU speed, but rather increase the CPU's efficiency in handling the program. However, creating too many threads can create a slight decrease in efficiency simply due to the program having to run more lines of code.
 
 
 
